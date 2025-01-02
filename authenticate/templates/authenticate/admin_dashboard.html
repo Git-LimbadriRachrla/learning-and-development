@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://img.freepik.com/free-vector/white-abstract-background_23-2148806276.jpg?w=2000');
+            background-size: cover;
+            min-height: 100vh;
+        }
+        .dashboard-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            padding: 40px;
+            margin-top: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .stats-card {
+            background: linear-gradient(45deg, #1a237e, #283593);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        .action-card {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(31, 38, 135, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .action-card:hover {
+            transform: translateY(-5px);
+        }
+        .navbar {
+            background: rgba(26, 35, 126, 0.95) !important;
+        }
+        .nav-link {
+            color: white !important;
+            margin: 0 10px;
+        }
+        .btn-admin {
+            background: #1a237e;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 25px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-admin:hover {
+            background: #283593;
+            color: white;
+            transform: translateY(-2px);
+        }
+        .dash-stat{
+            font-size: 25px;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Admin Dashboard</a>
+            <div class="navbar-nav ms-auto">
+                <span class="nav-link">Welcome, {{ user.username }}</span>
+                <a class="nav-link" href="/api/logout/">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-container">
+            <h2 class="welcome-message text-center" style="color: #1a237e;">
+                <i class="fas fa-user-circle fa-2x mb-3"></i><br>
+                Welcome to Your Dashboard
+            </h2>
+            <!-- Stats boxes -->
+            <div class="row">
+                <!-- Total Users -->
+                <div class="col-md-4">
+                    <div class="stats-card card">
+                        <div class="card-body text-center">
+                            <h4>Total Users</h4>
+                            <p class="dash-stat">{{ total_users }}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Total Courses -->
+                <div class="col-md-4">
+                    <div class="stats-card card">
+                        <div class="card-body text-center">
+                            <h4>Total Courses</h4>
+                            <p class="dash-stat">{{ total_courses }}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pending Requests -->
+                <div class="col-md-4">
+                    <div class="stats-card card">
+                        <div class="card-body text-center">
+                            <h4>Pending Requests</h4>
+                            <p class="dash-stat">{{ pending_requests }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Cards -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="action-card card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-plus-circle fa-3x mb-3 text-primary"></i>
+                            <h4>Create Course</h4>
+                            <p>Add new training courses for employees</p>
+                            <a href="/api/create-course/" class="btn btn-admin">Create Course</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="action-card card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-tasks fa-3x mb-3 text-primary"></i>
+                            <h4>View Requests</h4>
+                            <p>Manage employee submitted requests</p>
+                            <a href="/api/view-requests/" class="btn btn-admin">View Requests</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="action-card card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-chart-line fa-3x mb-3 text-primary"></i>
+                            <h4>Track Progress</h4>
+                            <p>Monitor employee course progress</p>
+                            <a href="/api/track-progress/" class="btn btn-admin">View Progress</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="action-card card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-graduation-cap fa-3x mb-3 text-primary"></i>
+                            <h4>View Courses</h4>
+                            <p>Manage existing courses</p>
+                            <a href="/api/view-courses/" class="btn btn-admin">View Courses</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="action-card card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-id-badge fa-3x mb-3 text-primary"></i>
+                            <h4>Generate Credentials</h4>
+                            <p>Generate credentials for employees</p>
+                            <a href="/api/generate-cred/" class="btn btn-admin">Generate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="action-card card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-comments fa-3x mb-3 text-primary"></i>
+                            <h4>View Feedback</h4>
+                            <p>View feedback submitted by employees</p>
+                            <a href="/api/view-feedback/" class="btn btn-admin">View Feedback</a>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
